@@ -1,4 +1,6 @@
 # Pen Name
+[![Build Status](https://travis-ci.org/gomicro/penname.svg)](https://travis-ci.org/gomicro/penname)
+[![GoDoc](https://godoc.org/github.com/gomicro/penname?status.png)](https://godoc.org/github.com/gomicro/penname)
 A mock that implements the Writer interface for testing.
 
 # Example

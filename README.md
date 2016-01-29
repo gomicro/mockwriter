@@ -1,2 +1,2 @@
-# Mock Writer
-A mocked writer for those times when you don't want a real one
+# Pen Name
+A mock that implements the Writer interface for testing.

@@ -11,6 +11,10 @@ func New() *PenName {
 	return &PenName{}
 }
 
+func (p *PenName) Clear() {
+	p.Written = []byte{}
+}
+
 func (p *PenName) ReturnError(err error) {
 	p.returnError = err
 }

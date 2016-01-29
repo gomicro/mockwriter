@@ -42,5 +42,18 @@ func TestPenname(t *testing.T) {
 			fmt.Fprint(p, t)
 			Expect(p.Written).To(Equal([]byte(t)))
 		})
+
+		g.It("should clear what was written when told to", func() {
+			t := "Nothing to see here move along"
+			p := &PenName{}
+
+			n, err := p.Write([]byte(t))
+			Expect(err).NotTo(HaveOccurred())
+			Expect(n).To(Equal(len(t)))
+			Expect(p.Written).To(Equal([]byte(t)))
+
+			p.Clear()
+			Expect(p.Written).To(Equal([]byte("")))
+		})
 	})
 }

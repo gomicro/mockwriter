@@ -1,6 +1,9 @@
 package penname
 
-import ()
+import (
+	"fmt"
+	"net/http"
+)
 
 type PenName struct {
 	Closed      bool
@@ -19,6 +22,12 @@ func (p *PenName) Close() error {
 
 	p.Closed = true
 	return nil
+}
+
+// Implements the ResponseWriter interface, returning an empty set of headers
+// to meet the interface requirements
+func (p *PenName) Header() http.Header {
+	return http.Header{}
 }
 
 // Convencinece method for reseting state.
@@ -41,4 +50,9 @@ func (p *PenName) Write(b []byte) (n int, err error) {
 
 	p.Written = b
 	return len(p.Written), nil
+}
+
+// Implements the ResponseWriter interface, capturing headers to the same written buffer
+func (p *PenName) WriteHeader(i int) {
+	p.Write([]byte(fmt.Sprintf("Header: %v", i)))
 }

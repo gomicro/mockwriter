@@ -6,9 +6,10 @@ import (
 )
 
 type PenName struct {
-	Closed      bool
-	Written     []byte
-	returnError error
+	Closed         bool
+	Written        []byte
+	WrittenHeaders []byte
+	returnError    error
 }
 
 func New() *PenName {
@@ -54,5 +55,7 @@ func (p *PenName) Write(b []byte) (n int, err error) {
 
 // Implements the ResponseWriter interface, capturing headers to the same written buffer
 func (p *PenName) WriteHeader(i int) {
-	p.Write([]byte(fmt.Sprintf("Header: %v", i)))
+	b := []byte(fmt.Sprintf("Header: %v", i))
+	p.WrittenHeaders = b
+	p.Write(b)
 }

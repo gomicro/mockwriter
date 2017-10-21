@@ -1,3 +1,5 @@
+// Package penname provides a mock that implements the Closer & Writer
+// interfaces for testing
 package penname
 
 import (

@@ -1,6 +1,9 @@
 # Pen Name
 [![Build Status](https://travis-ci.org/gomicro/penname.svg)](https://travis-ci.org/gomicro/penname)
-[![GoDoc](https://godoc.org/github.com/gomicro/penname?status.png)](https://godoc.org/github.com/gomicro/penname)
+[![Go Reportcard](https://goreportcard.com/badge/github.com/gomicro/penname)](https://goreportcard.com/report/github.com/gomicro/penname)
+[![GoDoc](https://godoc.org/github.com/gomicro/penname?status.svg)](https://godoc.org/github.com/gomicro/penname)
+[![License](https://img.shields.io/github/license/gomicro/penname.svg)](https://github.com/gomicro/penname/blob/master/LICENSE.md)
+[![Release](https://img.shields.io/github/release/gomicro/penname.svg)](https://github.com/gomicro/penname/releases/latest)
 
 A mock that implements the Closer & Writer interfaces for testing.
 

@@ -71,7 +71,7 @@ func TestPenname(t *testing.T) {
 			n, err := p.Write([]byte(t))
 			Expect(err).NotTo(HaveOccurred())
 			Expect(n).To(Equal(len(t)))
-			Expect(p.Written).To(Equal([]byte(t)))
+			Expect(p.Written()).To(Equal([]byte(t)))
 		})
 
 		g.It("should return an error when told to", func() {
@@ -87,7 +87,7 @@ func TestPenname(t *testing.T) {
 			t := "Nothing to see here move along"
 
 			fmt.Fprint(p, t)
-			Expect(p.Written).To(Equal([]byte(t)))
+			Expect(p.Written()).To(Equal([]byte(t)))
 		})
 
 		g.It("should reset what was written when told to", func() {
@@ -96,10 +96,10 @@ func TestPenname(t *testing.T) {
 			n, err := p.Write([]byte(t))
 			Expect(err).NotTo(HaveOccurred())
 			Expect(n).To(Equal(len(t)))
-			Expect(p.Written).To(Equal([]byte(t)))
+			Expect(p.Written()).To(Equal([]byte(t)))
 
 			p.Reset()
-			Expect(p.Written).To(Equal([]byte("")))
+			Expect(p.Written()).To(Equal([]byte("")))
 		})
 	})
 }

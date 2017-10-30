@@ -3,6 +3,7 @@
 package penname
 
 import (
+	"bytes"
 	"fmt"
 	"net/http"
 )
@@ -11,8 +12,8 @@ import (
 // and capturing details for assertions
 type PenName struct {
 	Closed         bool
-	Written        []byte
-	WrittenHeaders []byte
+	written        bytes.Buffer
+	writtenHeaders bytes.Buffer
 	returnError    error
 }
 
@@ -42,7 +43,8 @@ func (p *PenName) Header() http.Header {
 // Reset is a convencinece method for reseting the state of the mock
 func (p *PenName) Reset() {
 	p.Closed = false
-	p.Written = []byte{}
+	p.written.Reset()
+	p.writtenHeaders.Reset()
 }
 
 // ReturnError sets the error that will be returned when actions are attempted
@@ -58,14 +60,23 @@ func (p *PenName) Write(b []byte) (n int, err error) {
 		return 0, p.returnError
 	}
 
-	p.Written = b
-	return len(p.Written), nil
+	p.written.Write(b)
+	return len(b), nil
 }
 
-// WriteHeader implements the ResponseWriter interface, capturing headers to the
-// same written buffer
+// Written returns the bytes that have been written to the writer
+func (p *PenName) Written() []byte {
+	return p.written.Bytes()
+}
+
+// WriteHeader implements the ResponseWriter interface, capturing headers to a
+// separate
 func (p *PenName) WriteHeader(i int) {
-	b := []byte(fmt.Sprintf("Header: %v", i))
-	p.WrittenHeaders = b
-	p.Write(b)
+	p.writtenHeaders.WriteString(fmt.Sprintf("Header: %v", i))
+}
+
+// WrittenHeaders returns the bytes of the headers that have been written to
+// the writer
+func (p *PenName) WrittenHeaders() []byte {
+	return p.writtenHeaders.Bytes()
 }

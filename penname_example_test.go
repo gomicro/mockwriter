@@ -15,7 +15,7 @@ func ExamplePenName() {
 
 	mw.Write([]byte("A random line to write, "))
 
-	if strings.Contains(string(mockWrite.Written), "random") {
+	if strings.Contains(string(mockWrite.Written()), "random") {
 		fmt.Println("Found a random")
 	}
 	// Output: A random line to write, Found a random

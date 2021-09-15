@@ -13,7 +13,11 @@ func ExamplePenName() {
 	mockWrite := penname.New()
 	mw := io.MultiWriter(os.Stdout, mockWrite)
 
-	mw.Write([]byte("A random line to write, "))
+	_, err := mw.Write([]byte("A random line to write, "))
+	if err != nil {
+		fmt.Printf("error: %v", err.Error())
+		os.Exit(1)
+	}
 
 	if strings.Contains(string(mockWrite.Written()), "random") {
 		fmt.Println("Found a random")
